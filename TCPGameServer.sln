@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCPGameServer", "TCPGameServer\TCPGameServer.csproj", "{B1369AF1-8AF6-424C-8F09-903DB620F362}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCPServer.Test", "TCPServer.Test\TCPServer.Test.csproj", "{331E40BE-C852-4F43-BD54-10A8F60BBD05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{B1369AF1-8AF6-424C-8F09-903DB620F362}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1369AF1-8AF6-424C-8F09-903DB620F362}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1369AF1-8AF6-424C-8F09-903DB620F362}.Release|Any CPU.Build.0 = Release|Any CPU
+		{331E40BE-C852-4F43-BD54-10A8F60BBD05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{331E40BE-C852-4F43-BD54-10A8F60BBD05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{331E40BE-C852-4F43-BD54-10A8F60BBD05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{331E40BE-C852-4F43-BD54-10A8F60BBD05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

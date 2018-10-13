@@ -15,14 +15,14 @@ namespace TCPGameServer
 		}
 	}
 
-    public struct Quanternion
+    public struct Quaternion
 	{
 		public float x;
 		public float y;
 		public float z;
-		public float w; // world space : Global or Local
+		public float w; 
 
-        public Quanternion(float x, float y, float z, float w)
+        public Quaternion(float x, float y, float z, float w)
 		{
 			this.x = x;
 			this.y = y;
