@@ -11,8 +11,14 @@ namespace TCPGameServer
 		public int ConnectionID;
 		byte[] _clientReceiveBuffer;
 
+		public ByteBuffer ByteBuffer;
+
 		public Client(TcpClient socket, int connectionID)
 		{
+			if (socket == null)
+			{
+				return;
+			}
 			Socket = socket;
 			ConnectionID = connectionID;
             
@@ -40,7 +46,8 @@ namespace TCPGameServer
                 byte[] newBytesRead = new byte[readBytes];
                 Buffer.BlockCopy(_clientReceiveBuffer, Constants.NETWORK_STREAM_OFFSET, newBytesRead, Constants.NETWORK_STREAM_OFFSET, readBytes);
 
-                //Handle the Data Here
+				//Handle the Data Here
+				ServerHandleData.HandleData(ConnectionID, newBytesRead); 
 				ClientNetworkStream.BeginRead(_clientReceiveBuffer, Constants.NETWORK_STREAM_OFFSET, Socket.ReceiveBufferSize, ReceiveBufferCallback, null);
 
 			}

@@ -16,6 +16,7 @@ namespace TCPGameServer
 
 		static void MainThread()
 		{
+			General.InitServer();
 			while(true)
 			{
 				
