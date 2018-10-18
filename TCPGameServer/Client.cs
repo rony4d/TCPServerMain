@@ -28,7 +28,7 @@ namespace TCPGameServer
 			_clientReceiveBuffer = new byte[Constants.MAX_BUFFER_SIZE];
 			ClientNetworkStream.BeginRead(_clientReceiveBuffer, Constants.NETWORK_STREAM_OFFSET,Socket.ReceiveBufferSize, ReceiveBufferCallback, null);
 
-			Text.WriteLine("Incoming connection from {0}", TextType.INFO, Socket.Client.RemoteEndPoint.AddressFamily.ToString());
+			Text.WriteLine("Incoming connection from {0}", TextType.INFO, Socket.Client.RemoteEndPoint.ToString());
 		}
 
 		private void ReceiveBufferCallback(IAsyncResult result)
@@ -61,7 +61,7 @@ namespace TCPGameServer
 
 		private void CloseConnection()
 		{
-			Text.WriteLine("Connection from {0} has been terminated", TextType.INFO, Socket.Client.RemoteEndPoint.AddressFamily.ToString());
+			Text.WriteLine("Connection from {0} has been terminated", TextType.INFO, Socket.Client.RemoteEndPoint.ToString());
 			Socket.Close();
 			Socket = null;
 		}

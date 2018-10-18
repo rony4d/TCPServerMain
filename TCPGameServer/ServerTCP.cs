@@ -13,15 +13,16 @@ namespace TCPGameServer
 		{
 			Text.WriteLine("Initializing server socket...", TextType.DEBUG);
 			serverSocket.Start();
-			serverSocket.BeginAcceptTcpClient(new AsyncCallback(ClientConnectCallback), null);// creates a new thread for the TCP server
+			serverSocket.BeginAcceptTcpClient(new AsyncCallback(ClientConnectCallback), null);// creates a new thread for the TCP server to start listening for incoming connections/packets
 		}
 
 		private static void ClientConnectCallback(IAsyncResult result)
 		{
+            //debugger can't get this guy since he is running on a separate thread. 
 			TcpClient tcpClient = serverSocket.EndAcceptTcpClient(result);
-			serverSocket.BeginAcceptTcpClient(new AsyncCallback(ClientConnectCallback), null);// creates a new thread for the TCP server
+			serverSocket.BeginAcceptTcpClient(new AsyncCallback(ClientConnectCallback), null);// creates a new thread for the TCP server to start listening for incoming connections/packets
             
-            for (int i = 0; i < Constants.MAX_PLAYERS; i++)
+            for (int i = 1; i < Constants.MAX_PLAYERS; i++)
 			{
                 if (Clients[i].Socket == null)
 				{
