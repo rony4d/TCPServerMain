@@ -1,6 +1,18 @@
 ﻿using System;
 namespace TCPGameServer
 {
+	public class Types
+	{
+		public static PlayerRec[] PlayerRecs = new PlayerRec[Constants.MAX_PLAYERS];
+	}
+	public struct PlayerRec
+	{
+		public Vector3 Position { get; set; }
+		public Vector3 Collider { get; set; }
+		public Quaternion Rotation { get; set; }
+		public int Health { get; set; }
+	}
+
     public struct Vector3
 	{
 		public float x;

@@ -30,6 +30,7 @@ namespace TCPGameServer
 			for (int i = 1; i < Constants.MAX_PLAYERS; i++)
 			{
 				ServerTCP.Clients[i] = new Client(null, 0);
+				Types.PlayerRecs[i] = new PlayerRec();
 			}
 		}
     }
