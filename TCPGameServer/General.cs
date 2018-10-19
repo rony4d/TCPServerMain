@@ -31,7 +31,16 @@ namespace TCPGameServer
 			{
 				ServerTCP.Clients[i] = new Client(null, 0);
 				Types.PlayerRecs[i] = new PlayerRec();
+				Types.TempPlayerRecs[i] = new TempPlayerRec();
+
 			}
+		}
+
+        public static void JoinMap(int connectionId)
+		{
+			Types.TempPlayerRecs[connectionId].isPlaying = true;
+			ServerTCP.SendInGame(connectionId);
+			ServerTCP.SendPlayerData(connectionId);
 		}
     }
 }

@@ -27,6 +27,7 @@ namespace TCPGameServer
                 if (Clients[i].Socket == null)
 				{
 					Clients[i] = new Client(tcpClient, i);
+					General.JoinMap(i);
 					return;
 				}
 			}
@@ -37,13 +38,67 @@ namespace TCPGameServer
 			ByteBuffer byteBuffer = new ByteBuffer();
 			byteBuffer.WriteInteger(data.GetUpperBound(0) - data.GetLowerBound(0) + 1);
 			byteBuffer.WriteBytes(data);
-			Clients[connectionID].ClientNetworkStream.BeginWrite(byteBuffer.ToArray(), Constants.NETWORK_STREAM_OFFSET, byteBuffer.ToArray().Length, null,null);
+			if (Clients[connectionID].ClientNetworkStream != null)
+			{
+				Clients[connectionID].ClientNetworkStream.BeginWrite(byteBuffer.ToArray(), Constants.NETWORK_STREAM_OFFSET, byteBuffer.ToArray().Length, null, null);
+
+			}else{
+				Text.WriteLine("Client with connection Id" + connectionID +" has null network stream", TextType.ERROR);
+			}
 			byteBuffer.Dispose();
 		}
 
 		public static void SendDataToAll(byte[] data)
 		{
-			////
+			for (int i = 1; i < Constants.MAX_PLAYERS; i++)
+			{
+                if (Clients[i].Socket != null)
+				{
+                    if (Types.TempPlayerRecs[i].isPlaying)
+					{
+						SendDataTo(i, data); 
+					}
+				}
+			}
+		}
+
+		public static void SendInGame(int connectionId)
+		{
+			ByteBuffer buffer = new ByteBuffer();
+			buffer.WriteInteger((int)ServerPackets.SIngame);
+			buffer.WriteInteger(connectionId);
+			SendDataTo(connectionId, buffer.ToArray());
+			buffer.Dispose();
+		}
+
+ 
+
+		public static byte[] PlayerData(int connectionId)
+		{
+			ByteBuffer buffer = new ByteBuffer();
+            buffer.WriteInteger((int)ServerPackets.SPlayerData);
+            buffer.WriteInteger(connectionId);
+			return buffer.ToArray();
+		}
+
+		public static void SendPlayerData(int connectionId)
+        {
+	
+			for (int i = 1; i < Constants.MAX_PLAYERS; i++)
+			{
+				if (Clients[i] != null)
+                {
+                    if (Types.TempPlayerRecs[i].isPlaying)
+					{
+                        if (connectionId != i) 
+						{
+							SendDataTo(connectionId, PlayerData(i));
+						}
+					}
+				}
+			}
+
+			SendDataToAll(PlayerData(connectionId));
 		}
 	
     }

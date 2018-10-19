@@ -29,6 +29,8 @@ namespace TCPGameServer
 			ClientNetworkStream.BeginRead(_clientReceiveBuffer, Constants.NETWORK_STREAM_OFFSET,Socket.ReceiveBufferSize, ReceiveBufferCallback, null);
 
 			Text.WriteLine("Incoming connection from {0}", TextType.INFO, Socket.Client.RemoteEndPoint.ToString());
+
+			General.JoinMap(connectionID);
 		}
 
 		private void ReceiveBufferCallback(IAsyncResult result)

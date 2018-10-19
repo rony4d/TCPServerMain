@@ -4,6 +4,8 @@ namespace TCPGameServer
 	public class Types
 	{
 		public static PlayerRec[] PlayerRecs = new PlayerRec[Constants.MAX_PLAYERS];
+		public static TempPlayerRec[] TempPlayerRecs = new TempPlayerRec[Constants.MAX_PLAYERS];
+
 	}
 	public struct PlayerRec
 	{
@@ -13,6 +15,10 @@ namespace TCPGameServer
 		public int Health { get; set; }
 	}
 
+    public struct TempPlayerRec
+	{
+		public bool isPlaying;
+	}
     public struct Vector3
 	{
 		public float x;

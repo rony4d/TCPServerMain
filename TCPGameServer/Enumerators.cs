@@ -1,13 +1,15 @@
 ﻿using System;
 namespace TCPGameServer
 {
-    public enum ServerPackets
+	public enum ServerPackets
     {
+        SIngame = 1,
+        SPlayerData
     }
 
-	public enum ClientPackets
+    public enum ClientPackets
     {
-		ClientLogin,
+        ClientLogin,
         ClientNewAccount
     }
 }
