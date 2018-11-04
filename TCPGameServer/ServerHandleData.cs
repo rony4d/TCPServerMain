@@ -83,7 +83,7 @@ namespace TCPGameServer
 			ByteBuffer byteBuffer = new ByteBuffer();
 			byteBuffer.WriteBytes(data);
 			packetId = byteBuffer.ReadInteger();
-			byteBuffer.Dispose();
+			//byteBuffer.Dispose();
             if (Packets.TryGetValue(packetId, out Packet_ packet))
 			{
 				Text.WriteLine("<Packet>" + Enum.GetName(typeof(ClientPackets), packetId),TextType.DEBUG);

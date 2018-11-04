@@ -4,7 +4,8 @@ namespace TCPGameServer
 	public enum ServerPackets
     {
         SIngame = 1,
-        SPlayerData
+        SPlayerData,
+		SDisconnect
     }
 
     public enum ClientPackets

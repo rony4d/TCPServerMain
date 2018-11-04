@@ -25,6 +25,7 @@ namespace TCPGameServer
 			Socket.SendBufferSize = Constants.MAX_BUFFER_SIZE;
 			Socket.ReceiveBufferSize = Constants.MAX_BUFFER_SIZE;
 			ClientNetworkStream = Socket.GetStream();
+            Text.WriteLine("nextwork stream initialized for client: " + connectionID, TextType.INFO);
 			_clientReceiveBuffer = new byte[Constants.MAX_BUFFER_SIZE];
 			ClientNetworkStream.BeginRead(_clientReceiveBuffer, Constants.NETWORK_STREAM_OFFSET,Socket.ReceiveBufferSize, ReceiveBufferCallback, null);
 
@@ -49,7 +50,10 @@ namespace TCPGameServer
                 Buffer.BlockCopy(_clientReceiveBuffer, Constants.NETWORK_STREAM_OFFSET, newBytesRead, Constants.NETWORK_STREAM_OFFSET, readBytes);
 
 				//Handle the Data Here
+                Text.WriteLine("Server is now handling data from " + Socket.Client.RemoteEndPoint, TextType.INFO);
+
 				ServerHandleData.HandleData(ConnectionID, newBytesRead); 
+
 				ClientNetworkStream.BeginRead(_clientReceiveBuffer, Constants.NETWORK_STREAM_OFFSET, Socket.ReceiveBufferSize, ReceiveBufferCallback, null);
 
 			}
@@ -64,6 +68,7 @@ namespace TCPGameServer
 		private void CloseConnection()
 		{
 			Text.WriteLine("Connection from {0} has been terminated", TextType.INFO, Socket.Client.RemoteEndPoint.ToString());
+			ServerTCP.SendPlayerDisconnect(ConnectionID);
 			Socket.Close();
 			Socket = null;
 		}

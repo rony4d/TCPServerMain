@@ -118,7 +118,7 @@ namespace TCPGameServer
 				}
 
 				int value = BitConverter.ToInt32(_readBuffer, _readPosition);
-                if (Peek & (_buffers.Count > _readPosition))
+                if (Peek && (_buffers.Count > _readPosition))
 				{
 					_readPosition += 4;
 				}
@@ -141,7 +141,7 @@ namespace TCPGameServer
                 }
 
 				byte[] value = _buffers.GetRange(_readPosition, Length).ToArray();
-                if (Peek & (_buffers.Count > _readPosition))
+                if (Peek && (_buffers.Count > _readPosition))
                 {
                     _readPosition += Length;
                 }
@@ -164,7 +164,7 @@ namespace TCPGameServer
             }
 
 			string value = Encoding.ASCII.GetString(_readBuffer, _readPosition, length);
-            if (Peek & (_buffers.Count > _readPosition))
+            if (Peek && (_buffers.Count > _readPosition))
             {
                 _readPosition += length;
             }
@@ -185,7 +185,7 @@ namespace TCPGameServer
                 }
 
                 short value = BitConverter.ToInt16(_readBuffer, _readPosition);
-                if (Peek & (_buffers.Count > _readPosition))
+                if (Peek && (_buffers.Count > _readPosition))
                 {
                     _readPosition += 2;
                 }
@@ -210,7 +210,7 @@ namespace TCPGameServer
 				}
 
 				long value = BitConverter.ToInt64(_readBuffer, _readPosition);
-				if (Peek & (_buffers.Count > _readPosition))
+				if (Peek && (_buffers.Count > _readPosition))
 				{
 					_readPosition += 8;
 				}
@@ -235,7 +235,7 @@ namespace TCPGameServer
                 }
 
                 float value = BitConverter.ToSingle(_readBuffer, _readPosition);
-                if (Peek & (_buffers.Count > _readPosition))
+                if (Peek && (_buffers.Count > _readPosition))
                 {
                     _readPosition +=  4;
                 }
